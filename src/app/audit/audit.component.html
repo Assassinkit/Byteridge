@@ -1,0 +1,103 @@
+<!-- <h1>Hi {{currentUser.firstName}}!</h1> -->
+
+
+<style>
+  table {
+  width: 100%;
+  column-gap: normal;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+</style>
+
+
+<p>You're logged in with Angular 8!!</p>
+<h3>All login audit :</h3>
+<!-- <ul> -->
+    <!-- <li *ngFor="let audit of audits">
+        <br/><span class="badge badge-primary">{{audit.user}}</span>
+        <br/><span class="badge badge-secondary">{{audit._id}}</span>
+        <br/>Login - {{audit.loginTime}}
+        <br/>Logout - {{audit.logoutTime}}
+        <br/>IP - {{audit.ip}}
+    </li> -->
+
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+    
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="audits" style="width: 100%" matSort>
+    
+        <!-- User Column -->
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
+          <td mat-cell style="
+          padding-left: 24px;
+          color: rgb(0, 89, 255);
+          font-size: x-small;
+          padding-right: 20px;" *matCellDef="let row"> {{row.user}} </td>
+        </ng-container>
+    
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell style="
+          padding-left: 24px;
+          color: rgb(0, 105, 70);
+          font-size: x-small;
+          padding-right: 20px;" *matCellDef="let row"> {{row._id}} </td>
+        </ng-container>
+    
+        <!-- Login Time Column -->
+        <ng-container matColumnDef="loginTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Login Time </th>
+          <td mat-cell style="
+          padding-left: 24px;
+          color: rgb(131, 122, 0);
+          font-size: x-small;
+          padding-right: 20px;" *matCellDef="let row"> {{row.loginTime | date:'medium'}} </td>
+        </ng-container>
+    
+        <!-- Logout Time Column -->
+        <ng-container matColumnDef="logoutTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Logout Time </th>
+          <td mat-cell style="
+          padding-left: 24px;
+          color: rgb(0, 0, 0);
+          font-size: x-small;
+          padding-right: 20px;" *matCellDef="let row"> {{row.logoutTime | date:'medium'}} </td>
+        </ng-container>
+  
+         <!-- IP Column -->
+         <ng-container matColumnDef="ip">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> IP </th>
+          <td mat-cell style="
+          padding-left: 24px;
+          color: rgb(64, 62, 0);
+          font-size: x-small;
+          padding-right: 20px;" *matCellDef="let row"> {{row.ip}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+      
+
+<!-- </ul> -->

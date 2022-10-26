@@ -1,0 +1,10 @@
+﻿<h1>Hi {{currentUser.firstName}}!</h1>
+<p>You're logged in!!</p>
+<h3>All registered users:</h3>
+<ul>
+    <li *ngFor="let user of users">
+        {{user.username}} ({{user.firstName}} {{user.lastName}})
+        <br/><span class="badge badge-secondary">{{user.role}}</span>
+        <br/><a (click)="deleteUser(user.id)" class="badge badge-danger" *ngIf="currentUser.role == 'Auditor'">Delete</a>
+    </li>
+</ul>
